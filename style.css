@@ -1,0 +1,40 @@
+.qrcode {
+  position: fixed;
+  background: none repeat #FFF;
+  top: 50%; left: 50%;
+  width: 400px; height: 400px;
+  margin: -300px 0px 0px -300px;
+  padding: 1em;
+  border: 1em dashed;
+  z-index: 999;
+  display: none;
+}
+div {
+  padding-top: 1rem; /* padding correction */
+}
+
+.private {
+  font-size: 0.9rem;
+  color: #999;
+}
+.private-sm {
+  font-size: 0.8rem;
+  color: #999;
+}
+@media print  {
+  .noprint  {
+    display: none;
+    }
+  }
+@media screen {
+  .noscreen {
+    display: none;
+    }
+  }
+
+body {
+  background-color: black;
+  color: white;
+
+}
+
