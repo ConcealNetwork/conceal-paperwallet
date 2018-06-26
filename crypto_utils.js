@@ -2174,6 +2174,7 @@ function mn_random(bits) {
     'use strict';
     if (bits % 32 !== 0) throw "Something weird went wrong: Invalid number of bits - " + bits;
     var array = new Uint32Array(bits / 32);
+    if (!window.crypto) window.alert("Unfortunately this program only runs on browsers that support the JavaScript Crypto API");
     if (!window.crypto) throw "Unfortunately MyMonero only runs on browsers that support the JavaScript Crypto API";
     var i = 0;
 
