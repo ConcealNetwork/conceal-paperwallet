@@ -1,20 +1,24 @@
-var show_generate = function() {
+var show_generate = function () {
+  $("#user_entropy_widget").val(randomWords(15));
   document.getElementById("generate").style.display = "block";
   document.getElementById("restore").style.display = "none";
   document.getElementById("step2").style.display = "none";
+  document.getElementById("intro").style.display = "none";
 };
 
-var show_restore = function() {
+var show_restore = function () {
   document.getElementById("restore").style.display = "block";
   document.getElementById("generate").style.display = "none";
   document.getElementById("step2").style.display = "none";
+  document.getElementById("intro").style.display = "none";
+  $("#restoreError").hide();
 };
 
-var getStringWords = function(string) {
+var getStringWords = function (string) {
   return string.replace(/^\s*(.*)\s*$/, '$1').replace(/\s+/, ' ').split(' ');
 };
 
-var genkeys = function(additional_entropy, lang) {
+var genkeys = function (additional_entropy, lang) {
   var seed = cnUtil.sc_reduce32(poor_mans_kdf(additional_entropy + cnUtil.rand_32()));
   var keys = cnUtil.create_address(seed);
   var passPhrase = mn_encode(seed, lang);
@@ -24,24 +28,51 @@ var genkeys = function(additional_entropy, lang) {
   }
 };
 
-var restore_keys = function(lang) {
-  var seed_phrase = document.getElementById("seed_phrase").value;
-  var seed = mn_decode(seed_phrase);
-  var keys = cnUtil.create_address(seed);
+var keys_download = function () {
+  var keysAsJSON = {
+    address: $("#address_widget").html(),
+    seedPhrase: $("#mnemonic_widget").html(),
+    privateSpendKey: $("#spend_key_widget").html(),
+    privateViewKey: $("#view_key_widget").html()
+    //privateKey: $("#private_keys_widget").html()
+  }
 
-  address_widget.innerHTML = keys.public_addr;
-  mnemonic_widget.innerHTML = seed_phrase;
-  spend_key_widget.innerHTML = keys.spend.sec;
-  view_key_widget.innerHTML = keys.view.sec;
+  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(keysAsJSON));
+  var dlAnchorElem = document.getElementById('downloadAnchorElem');
+  dlAnchorElem.setAttribute("href", dataStr);
+  dlAnchorElem.setAttribute("download", "ccxKeys.json");
+  dlAnchorElem.click();
+}
 
-  document.getElementById("step2").style.display = "block";
+var restore_keys = function (lang) {
+  $("#restoreError").hide();
+  try {
+    var seed_phrase = document.getElementById("seed_phrase").value;
+    var seed = mn_decode(seed_phrase);
+    var keys = cnUtil.create_address(seed);
+
+    address_widget.innerHTML = keys.public_addr;
+    mnemonic_widget.innerHTML = seed_phrase;
+    spend_key_widget.innerHTML = keys.spend.sec;
+    view_key_widget.innerHTML = keys.view.sec;
+
+    document.getElementById("step2").style.display = "block";
+
+  } catch (err) {
+    $("#restoreError").html(err);
+    $("#restoreError").show();
+  }
 };
 
-var genwallet = function(lang) {
+var backToHomepage = function () {
+  window.location.href = 'https://conceal.network';
+}
+
+var genwallet = function (lang) {
   document.getElementById("step2").style.display = "block";
   var spend_key_widget = document.getElementById("spend_key_widget");
   var view_key_widget = document.getElementById("view_key_widget");
-  var private_keys_widget = document.getElementById("private_keys_widget");
+  //var private_keys_widget = document.getElementById("private_keys_widget");
   var address_widget = document.getElementById("address_widget");
   var address_qr_widget = document.getElementById("address_qr_widget");
   var user_entropy_widget = document.getElementById("user_entropy_widget");
@@ -54,7 +85,7 @@ var genwallet = function(lang) {
   mnemonic_widget.innerHTML = mnemonic;
   spend_key_widget.innerHTML = keys.spend.sec;
   view_key_widget.innerHTML = keys.view.sec;
-  private_keys_widget.innerHTML = keys.privateKeys;
+  //private_keys_widget.innerHTML = keys.privateKeys;
 
   // wallet_keys_widget.innerHTML = keys.privateKeys;
   //address_qr_widget.innerHTML = "";

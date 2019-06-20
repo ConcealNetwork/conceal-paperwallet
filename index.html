@@ -1,123 +1,224 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Conceal Wallet Generator</title>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="style.css">
+<html>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="icon" type="image/icon" href="favicon.ico">
+  <title>Conceal.Network - Paper Wallet</title>
+  <!-- vendor css -->
+  <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="lib/Ionicons/css/ionicons.css" rel="stylesheet">
 
+  <!-- Slim CSS -->
+  <link rel="stylesheet" href="css/slim.css">
+  <link rel="stylesheet" href="css/slim.one.css">
+
+  <!-- script files -->
+
+  <script src="lib/jquery/js/jquery.js"></script>
+  <script src="lib/popper.js/js/popper.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.js"></script>
+  <script src="lib/jquery.cookie/js/jquery.cookie.js"></script>
+  <script src="lib/jquery.timeago/js/jquery.timeago.js"></script>
+
+  <script src="js/ResizeSensor.js"></script>
+  <script src="js/crypto_utils.js"></script>
+  <script src="js/randomWords.js"></script>
+  <script src="js/wallet.js"></script>
+  <script src="js/slim.js"></script>
 </head>
-<body style="background-color: #111111;color: white;">
 
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <center>
-        <img class="img-fluid" src="logo.png" alt="Conceal" width="300px">
-      </center>
+<body>
+  <div class="slim-header">
+    <div class="container">
+      <div class="slim-header-left">
+        <img src="img/logo.svg" width="48" height="58">
+        <div class="logoText">
+          <h2 class="slim-logo">
+            <a href="index.html">
+              <span>PAPER WALLET</span></a>
+          </h2>
+        </div>
+      </div>
+      <!-- slim-header-left -->
+      <div class="slim-header-right">
+        <button id="btnBackToHomepage" class="btn btn-primary-outline" onclick="js:backToHomepage();" type="button"
+          value="Generate a wallet">Back to homepage</button>
+      </div>
+      <!-- header-right -->
     </div>
+    <!-- container -->
   </div>
-  <div class="row  d-print-none">
-    <div class="col-12 d-print-none"><center>
-      <h3>
-          <button class="btn btn-default" onclick="js:show_generate();" type="button" value="Generate a wallet">Generate a Wallet</button> or
-          <button class="btn btn-default" onclick="js:show_restore();" type="button" value="restore keys from seed phrase">Restore keys from seed phrase</button>
-      </h3>
-      <div id="generate" style="display:none;">
-        <p>For extra security, type a few random letters, words, numbers, or symbols below. Press "Generate Wallet" when you are done.</p>
-        <input id="user_entropy_widget" type="text" style="width:100%;" value="" placeholder="  The more random stuff you type in this box, the better your keys will be." /><br /><br />
-        <center>
-          <button class="btn btn-default" onclick="js:genwallet(null);" type="button" value="Generate wallet">Generate Wallet</button>
-        </center>
+  <!-- slim-header -->
+
+  <div id="content">
+    <div class="container">
+      <div id="page">
+
+        <div id="intro" class="row">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title tx-normal tx-white mg-b-10">What is a Paper Wallet?</h5>
+              <div class="card-text">
+                <p>
+                  A paper wallet is an offline mechanism for storing Conceal coins. The process involves printing the
+                  private keys and Conceal addresses onto paper. Physical wallets, also known as "physical Conceals,"
+                  are considered one of the safest ways to store Conceal; if properly constructed, and provided that
+                  certain precautions are taken, it will be nearly impossible for a hostile user to access your Conceal
+                  holdings. Images of physical Conceal coins are commonly seen in media coverage in innovative styles,
+                  mostly with a ‘new look’ of the coin and the private key printed either on paper, plastic, or metal.
+                </p>
+                <p>
+                  A paper wallet is considered an extremely secure way to keep Conceal safe from cyber-attacks, malware,
+                  etc. A paper wallet involves "printing" and storing Conceal coins in an offline mode. But it's
+                  important to remember that it’s not the Conceal coins that are being printed out like regular
+                  currency. It's the information stored in a Conceal wallet or digital wallet that gets printed out. The
+                  data appearing on the wallet includes the public key (wallet address), which allows people to transfer
+                  money into that wallet, and the private key, which gives access to fund spending. Thus, Conceal coins
+                  themselves are not stored offline, but the important keys are stored offline.
+                </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row  d-print-none">
+          <div class="col-12 d-print-none">
+            <center>
+              <h3 class="generateRow">
+                <button class="btn btn-primary-outline" onclick="js:show_generate();" type="button"
+                  value="Generate a wallet">Generate a Wallet</button> or
+                <button class="btn btn-primary-outline" onclick="js:show_restore();" type="button"
+                  value="restore keys from seed phrase">Restore keys from seed phrase</button>
+              </h3>
+              <div id="generate" style="display:none;">
+                <p>For extra security, type a few random letters, words, numbers, or symbols below. Press "Generate
+                  Wallet" when you are done.</p>
+                <input class="form-control tx-gray-300" id="user_entropy_widget" type="text" style="width:100%;"
+                  value=""
+                  placeholder="  The more random stuff you type in this box, the better your keys will be." /><br /><br />
+                <center>
+                  <button class="btn btn-primary-outline" onclick="js:genwallet(null);" type="button"
+                    value="Generate wallet">Generate Wallet</button>
+                </center>
+              </div>
+
+              <div id="restore" style="display: none;">
+                <label class="tx-danger" id="restoreError" style="display: none;"></label>
+                <input class="form-control tx-gray-300" id="seed_phrase" type="text" style="width:100%;" value=""
+                  placeholder="Enter your seed phrase words here." /><br /><br />
+                <center>
+                  <button class="btn btn-primary-outline" onclick="js:restore_keys(null);" type="button"
+                    value="Restore keys">Restore Keys</button>
+                </center>
+              </div>
+            </center>
+          </div>
+        </div>
+
+        <div id="step2" class="row" style="display:none;">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title tx-normal tx-white mg-b-10">Public Address</h5>
+                <p class="card-subtitle tx-normal mg-b-15">Write down your public address, or copy paste it somewhere.
+                  Anyone with this address can send you money</p>
+                <div class="card-text">
+
+                  <div class="col border border-secondary" style="font-family: monospace, monospace; padding: 1em;">
+                    <center>
+                      <strong>
+                        <span style="font-family: monospace, monospace; word-wrap: break-word;"
+                          id="address_widget">Reticulating Splines...</span>
+
+                      </strong>
+                    </center>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title tx-normal tx-white mg-b-10">Seed Phrase</h5>
+                    <p class="card-subtitle tx-normal mg-b-15">Copy your seed phrase and keys. If you lose your wallet,
+                      these can be used to restore your money. That also means you need to keep them safe and private.
+                      This is your seed phrase. You can use it to regenerate your wallet if you lose
+                      it.</p>
+                    <div class="card-text">
+                      <div class="col border border-secondary" style="font-family: monospace, monospace; padding: 1em;">
+                        <span class="emphasisText">Seed Phrase:</span>
+                        <span class="private">
+                          <span id="mnemonic_widget">Reticulating Splines...</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row d-print-block">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title tx-normal tx-white mg-b-10">Wallet Keys</h5>
+                    <p class="card-subtitle tx-normal mg-b-15">These are the keys you need to regenerate your wallet.
+                    </p>
+                    <div class="card-text">
+                      <!--p class="d-print-none">Print or write down these keys and keep them safe. Without them you cannot access your money. There are no second chances.</p-->
+                      <div class="row border border-secondary keysRow" style="padding:1em;">
+                        <div class="col" style="overflow:visible">
+                          <span class="emphasisText mg-r-3">Private Spend Key:</span>
+                          <span class="private">
+                            <span style="font-family: monospace, monospace; word-wrap: break-word;"
+                              id="spend_key_widget">Generating...</span>
+                          </span>
+                        </div>
+                        <div class="col" style="overflow:visible">
+                          <span class="emphasisText mg-r-3">Private View Key:</span>
+                          <span class="private">
+                            <span style="font-family: monospace, monospace; word-wrap: break-word;"
+                              id="view_key_widget">Generating...</span>
+                          </span>
+                        </div>
+                        <!--
+                        <div class="col privKeysCollumn" style="overflow:visible">
+                          <span class="emphasisText mg-r-3">Private Keys for importing into GUI wallet:</span>
+                          <span class="private">
+                            <span style="font-family: monospace, monospace; word-wrap: break-word;"
+                              id="private_keys_widget">Generating...</span>
+                          </span>
+                        </div>
+                        -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-print-none printRow">
+                <div class="col-12">
+                  <center>
+                    <input type="button" onClick="window.print()" class="btn btn-primary-outline"
+                      value="Print This Page" />
+                    <input type="button" onClick="js:keys_download();" class="btn btn-primary-outline"
+                      value="Download Keys" />
+                    <a id="downloadAnchorElem" href="#" style="display: none;">
+                  </center>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div id="restore" style="display: none;">
-        <input id="seed_phrase" type="text" style="width:100%;" value="" placeholder="Enter your seed phrase words here."/><br /><br />
-        <center>
-          <button class="btn btn-default" onclick="js:restore_keys(null);" type="button" value="Restore keys">Restore Keys</button>
-        </center>
-      </div>
-
-     </center>
-
     </div>
-  </div>
-
-  <div id="step2" class="row" style="display:none;">
-    <div class="col-12">
-      <p class="d-print-none">Write down your public address, or copy paste it somewhere. Anyone with this address can send you money.</p>
-      <h3 class="d-print-block">Public Address</h3>
-      <div class="col border border-success" style="padding: 1em;">
-      <center>
-        <strong>
-          <span  style="font-family: monospace, monospace; word-wrap: break-word;" class="" id="address_widget">Reticulating Splines...</span>
-
-        </strong>
-      </center>
-      </div>
-
-      <div class="row" >
-  <div class="col-12">
-    <h3 class="d-print-block">Seed Phrase</h3>
-    <p class="d-print-none">Copy your seed phrase and keys. If you lose your wallet, these can be used to restore your money. That also means you need to keep them safe and private.</p>
-    <p class="d-print-block">This is your seed phrase. You can use it to regenerate your wallet if you lose it.</p>
-    <em>
-      <div class="col border border-danger" style="font-family: monospace, monospace; padding: 1em;">
-        <strong>Seed Phrase:</strong>
-        <span class="private">
-          <span id="mnemonic_widget">Reticulating Splines...</span>
-        </span>
-      </div>
-    </em>
-  </div>
-  </div>
-  <br>
-  <div class="row d-print-block">
-    <div class="col-12">
-      <h3 class="d-print-block">Wallet Keys</h3>
-      <p>These are the keys you need to regenerate your wallet.</p>
-    </div>
-  </div>
-  <div class="col">
-     <!--p class="d-print-none">Print or write down these keys and keep them safe. Without them you cannot access your money. There are no second chances.</p-->
-    <div class="row border border-danger" style="padding:1em;">
-      <div class="col" style="overflow:visible">
-        <strong>Spend Key:</strong>
-        <span class="private">
-          <span style="font-family: monospace, monospace; word-wrap: break-word;" id="spend_key_widget">Generating...</span>
-        </span>
-      </div>
-      <div class="col" style="overflow:visible">
-        <strong>View Key:</strong>
-        <span class="private">
-          <span style="font-family: monospace, monospace; word-wrap: break-word;" id="view_key_widget">Generating...</span>
-        </span>
-      </div>
-      <div class="col" style="overflow:visible">
-        <strong>Private Keys for importing into GUI wallet:</strong>
-        <span class="private">
-          <span style="font-family: monospace, monospace; word-wrap: break-word;" id="private_keys_widget">Generating...</span>
-        </span>
-      </div>
-    </div>
-
-
-
-</div>
-<div class="row d-print-none">
-    <div class="col-12">
-      <center>
-      <input type="button" onClick="window.print()" class="btn btn-default" value="Print This Page"/>
-    </center>
-    </div>
-</div>
-
-</div>
-</div>
-	<script type="text/javascript" src="iframe-buster.js"></script>
-	<script type="text/javascript" src="crypto_utils.js"></script>
-	<script type="text/javascript" src="wallet.js"></script>
-
 </body>
+
 </html>
