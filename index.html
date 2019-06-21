@@ -10,22 +10,23 @@
   <!-- vendor css -->
   <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet">
   <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="lib/Ionicons/css/ionicons.css" rel="stylesheet">
 
   <!-- Slim CSS -->
   <link rel="stylesheet" href="css/slim.css">
   <link rel="stylesheet" href="css/slim.one.css">
+  <link rel="stylesheet" href="css/iziToast.min.css">
+  <link rel="stylesheet" href="css/style.css">
 
   <!-- script files -->
 
   <script src="lib/jquery/js/jquery.js"></script>
-  <script src="lib/popper.js/js/popper.js"></script>
   <script src="lib/bootstrap/js/bootstrap.js"></script>
   <script src="lib/jquery.cookie/js/jquery.cookie.js"></script>
-  <script src="lib/jquery.timeago/js/jquery.timeago.js"></script>
 
+  <script src="js/jquery.qrcode.min.js"></script>
   <script src="js/ResizeSensor.js"></script>
   <script src="js/crypto_utils.js"></script>
+  <script src="js/iziToast.min.js"></script>
   <script src="js/randomWords.js"></script>
   <script src="js/wallet.js"></script>
   <script src="js/slim.js"></script>
@@ -128,16 +129,22 @@
                 <p class="card-subtitle tx-normal mg-b-15">Write down your public address, or copy paste it somewhere.
                   Anyone with this address can send you money</p>
                 <div class="card-text">
-
                   <div class="col border border-secondary" style="font-family: monospace, monospace; padding: 1em;">
                     <center>
                       <strong>
-                        <span style="font-family: monospace, monospace; word-wrap: break-word;"
+                        <span style="font-family: monospace, monospace; word-wrap: break-word;" class="copyToClipboard"
                           id="address_widget">Reticulating Splines...</span>
-
                       </strong>
                     </center>
                   </div>
+                  <center>
+                    <div id="qrCodeWrapper">
+                      <a href="#" class="btn btn-outline-warning btn-icon" id="btnQrCode">
+                        <div><i class="fa fa-qrcode"></i></div>
+                      </a>
+                      <div id="qrcode"></div>
+                    </div>
+                  </center>
                 </div>
               </div>
             </div>
@@ -147,7 +154,8 @@
                 <div class="card">
                   <div class="card-body">
                     <h5 class="card-title tx-normal tx-white mg-b-10">Seed Phrase</h5>
-                    <p class="card-subtitle tx-normal mg-b-15">Copy your seed phrase and keys. If you lose your wallet,
+                    <p class="card-subtitle tx-normal mg-b-15">Copy your seed phrase and keys. If you lose your
+                      wallet,
                       these can be used to restore your money. That also means you need to keep them safe and private.
                       This is your seed phrase. You can use it to regenerate your wallet if you lose
                       it.</p>
@@ -155,7 +163,7 @@
                       <div class="col border border-secondary" style="font-family: monospace, monospace; padding: 1em;">
                         <span class="emphasisText">Seed Phrase:</span>
                         <span class="private">
-                          <span id="mnemonic_widget">Reticulating Splines...</span>
+                          <span id="mnemonic_widget" class="copyToClipboard">Reticulating Splines...</span>
                         </span>
                       </div>
                     </div>
@@ -178,14 +186,14 @@
                           <span class="emphasisText mg-r-3">Private Spend Key:</span>
                           <span class="private">
                             <span style="font-family: monospace, monospace; word-wrap: break-word;"
-                              id="spend_key_widget">Generating...</span>
+                              class="copyToClipboard" id="spend_key_widget">Generating...</span>
                           </span>
                         </div>
                         <div class="col" style="overflow:visible">
                           <span class="emphasisText mg-r-3">Private View Key:</span>
                           <span class="private">
                             <span style="font-family: monospace, monospace; word-wrap: break-word;"
-                              id="view_key_widget">Generating...</span>
+                              class="copyToClipboard" id="view_key_widget">Generating...</span>
                           </span>
                         </div>
                         <!--

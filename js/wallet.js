@@ -28,6 +28,24 @@ var genkeys = function (additional_entropy, lang) {
   }
 };
 
+function initializeQrCode() {
+  $('#qrcode').hide();
+  $('#qrcode').html("");
+  $("#btnQrCode").show();
+
+  $(".copyToClipboard").off("click").on("click", function () {
+    copyToClipboard($(this).html());
+    iziToast.success({ title: "Copied", message: "Content was copied to clipboard", position: "topRight", timeout: 2000 });
+  });
+
+  $("#btnQrCode").off("click").on("click", function (e) {
+    e.preventDefault();
+    $("#btnQrCode").hide();
+    $('#qrcode').qrcode($("#address_widget").html());
+    $("#qrcode").show();
+  });
+}
+
 var keys_download = function () {
   var keysAsJSON = {
     address: $("#address_widget").html(),
@@ -57,7 +75,7 @@ var restore_keys = function (lang) {
     view_key_widget.innerHTML = keys.view.sec;
 
     document.getElementById("step2").style.display = "block";
-
+    initializeQrCode();
   } catch (err) {
     $("#restoreError").html(err);
     $("#restoreError").show();
@@ -91,7 +109,18 @@ var genwallet = function (lang) {
   //address_qr_widget.innerHTML = "";
   //qr=new QRCode(address_qr_widget, {correctLevel:QRCode.CorrectLevel.L});
   //qr.makeCode("conceal:"+keys.public_addr);
+
+  initializeQrCode();
 };
+
+function copyToClipboard(text) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val(text).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
 
 /*
 previous_button_text = "";
