@@ -35,7 +35,12 @@ function initializeQrCode() {
 
   $(".copyToClipboard").off("click").on("click", function () {
     copyToClipboard($(this).html());
-    iziToast.success({ title: "Copied", message: "Content was copied to clipboard", position: "topRight", timeout: 2000 });
+    iziToast.success({
+      title: "Copied", message: "Content was copied to clipboard", position: "topRight",
+      backgroundColor: "orange",
+      messageColor: "#333",
+      timeout: 2000,
+    });
   });
 
   $("#btnQrCode").off("click").on("click", function (e) {
