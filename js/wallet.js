@@ -31,7 +31,6 @@ var genkeys = function (additional_entropy, lang) {
 function initializeQrCode() {
   $('#qrcode').hide();
   $('#qrcode').html("");
-  $("#btnQrCode").show();
 
   $(".copyToClipboard").off("click").on("click", function () {
     copyToClipboard($(this).html());
@@ -43,12 +42,8 @@ function initializeQrCode() {
     });
   });
 
-  $("#btnQrCode").off("click").on("click", function (e) {
-    e.preventDefault();
-    $("#btnQrCode").hide();
-    $('#qrcode').qrcode($("#address_widget").html());
-    $("#qrcode").show();
-  });
+  $('#qrcode').qrcode($("#address_widget").html());
+  $("#qrcode").show();
 }
 
 var keys_download = function () {
