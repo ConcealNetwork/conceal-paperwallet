@@ -46,8 +46,8 @@
       </div>
       <!-- slim-header-left -->
       <div class="slim-header-right">
-        <button id="btnBackToHomepage" class="btn btn-primary-outline" onclick="js:backToHomepage();" type="button"
-          value="Generate a wallet">Back to homepage</button>
+        <button id="btnBackToHomepage" class="btn btn-primary-outline" type="button" value="Generate a wallet">Back to
+          homepage</button>
       </div>
       <!-- header-right -->
     </div>
@@ -91,37 +91,36 @@
           <div class="col-12 d-print-none">
             <center>
               <h3 class="generateRow">
-                <button class="btn btn-primary-outline" onclick="js:show_generate();" type="button"
+                <button id="btnShowGenerate" class="btn btn-primary-outline" type="button"
                   value="Generate a wallet">Generate a Wallet</button> or
-                <button class="btn btn-primary-outline" onclick="js:show_restore();" type="button"
+                <button id="btnShowRestore" class="btn btn-primary-outline" type="button"
                   value="restore keys from seed phrase">Restore keys from seed phrase</button>
               </h3>
-              <div id="generate" style="display:none;">
+              <div id="generate">
                 <p>For extra security, type a few random letters, words, numbers, or symbols below. Press "Generate
                   Wallet" when you are done.</p>
-                <input class="form-control tx-gray-300" id="user_entropy_widget" type="text" style="width:100%;"
-                  value=""
+                <input class="form-control tx-gray-300" id="user_entropy_widget" type="text" value=""
                   placeholder="  The more random stuff you type in this box, the better your keys will be." /><br /><br />
                 <center>
-                  <button class="btn btn-primary-outline" onclick="js:genwallet(null);" type="button"
+                  <button id="btnGenerateWallet" class="btn btn-primary-outline" type="button"
                     value="Generate wallet">Generate Wallet</button>
                 </center>
               </div>
 
-              <div id="restore" style="display: none;">
-                <label class="tx-danger" id="restoreError" style="display: none;"></label>
-                <input class="form-control tx-gray-300" id="seed_phrase" type="text" style="width:100%;" value=""
+              <div id="restore">
+                <label class="tx-danger" id="restoreError"></label>
+                <input class="form-control tx-gray-300" id="seed_phrase" type="text" value=""
                   placeholder="Enter your seed phrase words here." /><br /><br />
                 <center>
-                  <button class="btn btn-primary-outline" onclick="js:restore_keys(null);" type="button"
-                    value="Restore keys">Restore Keys</button>
+                  <button id="btnRestoreKeys" class="btn btn-primary-outline" type="button" value="Restore keys">Restore
+                    Keys</button>
                 </center>
               </div>
             </center>
           </div>
         </div>
 
-        <div id="step2" class="row" style="display:none;">
+        <div id="step2" class="row">
           <div class="col-12">
             <div class="card">
               <div class="card-body">
@@ -129,11 +128,11 @@
                 <p class="card-subtitle tx-normal mg-b-15">Write down your public address, or copy paste it somewhere.
                   Anyone with this address can send you money</p>
                 <div class="card-text">
-                  <div class="col border border-secondary" style="font-family: monospace, monospace; padding: 1em;">
+                  <div class="col border border-secondary fontMonospace padding1em">
                     <center>
                       <strong>
-                        <span style="font-family: monospace, monospace; word-wrap: break-word;" class="copyToClipboard"
-                          id="address_widget">Reticulating Splines...</span>
+                        <span class="copyToClipboard fontMonospace wordBreak" id="address_widget">Reticulating
+                          Splines...</span>
                       </strong>
                     </center>
                   </div>
@@ -157,7 +156,7 @@
                       This is your seed phrase. You can use it to regenerate your wallet if you lose
                       it.</p>
                     <div class="card-text">
-                      <div class="col border border-secondary" style="font-family: monospace, monospace; padding: 1em;">
+                      <div class="col border border-secondary fontMonospace padding1em">
                         <span class="emphasisText">Seed Phrase:</span>
                         <span class="private">
                           <span id="mnemonic_widget" class="copyToClipboard">Reticulating Splines...</span>
@@ -178,26 +177,26 @@
                     </p>
                     <div class="card-text">
                       <!--p class="d-print-none">Print or write down these keys and keep them safe. Without them you cannot access your money. There are no second chances.</p-->
-                      <div class="row border border-secondary keysRow" style="padding:1em;">
-                        <div class="col" style="overflow:visible">
+                      <div class="row border border-secondary keysRow padding1em">
+                        <div class="col overflowVisible">
                           <span class="emphasisText mg-r-3">Private Spend Key:</span>
                           <span class="private">
-                            <span style="font-family: monospace, monospace; word-wrap: break-word;"
-                              class="copyToClipboard" id="spend_key_widget">Generating...</span>
+                            <span class="copyToClipboard wordBreak fontMonospace"
+                              id="spend_key_widget">Generating...</span>
                           </span>
                         </div>
-                        <div class="col" style="overflow:visible">
+                        <div class="col overflowVisible">
                           <span class="emphasisText mg-r-3">Private View Key:</span>
                           <span class="private">
-                            <span style="font-family: monospace, monospace; word-wrap: break-word;"
-                              class="copyToClipboard" id="view_key_widget">Generating...</span>
+                            <span class="copyToClipboard fontMonospace wordBreak" id="view_key_widget">Generating...
+                            </span>
                           </span>
                         </div>
                         <!--
-                        <div class="col privKeysCollumn" style="overflow:visible">
+                        <div class="col privKeysCollumn overflowVisible">
                           <span class="emphasisText mg-r-3">Private Keys for importing into GUI wallet:</span>
                           <span class="private">
-                            <span style="font-family: monospace, monospace; word-wrap: break-word;"
+                            <span class="fontMonospace wordBreak"
                               id="private_keys_widget">Generating...</span>
                           </span>
                         </div>
@@ -211,11 +210,9 @@
               <div class="d-print-none printRow">
                 <div class="col-12">
                   <center>
-                    <input type="button" onClick="window.print()" class="btn btn-primary-outline"
-                      value="Print This Page" />
-                    <input type="button" onClick="js:keys_download();" class="btn btn-primary-outline"
-                      value="Download Keys" />
-                    <a id="downloadAnchorElem" href="#" style="display: none;">
+                    <input id="btnPagePrint" type="button" class="btn btn-primary-outline" value="Print This Page" />
+                    <input id="btnDownloadKeys" type="button" class="btn btn-primary-outline" value="Download Keys" />
+                    <a id="downloadAnchorElem" href="#">
                   </center>
                 </div>
               </div>

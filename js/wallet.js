@@ -121,6 +121,35 @@ function copyToClipboard(text) {
   $temp.remove();
 }
 
+$(document).ready(function () {
+  $("#btnBackToHomepage").click(function () {
+    backToHomepage();
+  });
+
+  $("#btnShowGenerate").click(function () {
+    show_generate();
+  });
+
+  $("#btnShowRestore").click(function () {
+    show_restore();
+  });
+
+  $("#btnGenerateWallet").click(function () {
+    genwallet(null);
+  });
+
+  $("#btnRestoreKeys").click(function () {
+    restore_keys(null);
+  });
+
+  $("#btnPagePrint").click(function () {
+    window.print();
+  });
+
+  $("#btnDownloadKeys").click(function () {
+    keys_download();
+  });
+});
 
 /*
 previous_button_text = "";

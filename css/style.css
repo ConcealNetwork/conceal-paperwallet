@@ -51,14 +51,39 @@
 
 #restore {
   margin-top: 30px;
+  display: none;
 }
 
 #qrCodeWrapper {
   margin-top: 20px;
 }
 
+#step2, #restoreError, #downloadAnchorElem {
+  display: none;
+}
+
+#user_entropy_widget, #seed_phrase {
+  width:100%;
+}
+
 .copyToClipboard {
   cursor: pointer;
+}
+
+.fontMonospace {
+  font-family: monospace, monospace; 
+}
+
+.padding1em {
+  padding: 1em;
+}
+
+.wordBreak {
+  word-wrap: break-word;
+}
+
+.overflowVisible {
+  overflow: visible;
 }
 
 @media only screen and (max-width: 576px) {
