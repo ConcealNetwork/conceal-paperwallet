@@ -1,5 +1,5 @@
-# Conceal.Paper.Wallet
+# UltraNoteI.Paper.Wallet
 
-$CCX wallet/address generator on paper
+$XUNI wallet/address generator on paper
 
-https://conceal.network/paperwallet/
+https://paperwallet.ultranote.org/
