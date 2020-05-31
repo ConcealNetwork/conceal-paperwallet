@@ -1628,7 +1628,7 @@ var config = {
     coinSymbol: 'XUNI',
     coinName: 'UltraNote Infinity',
     coinUriPrefix: 'ultranotei:',
-    addressPrefix: 31444
+    addressPrefix: 0x2de638
 };
 var cnUtil = (function(initConfig) {
     //var config = $.extend({}, initConfig);
