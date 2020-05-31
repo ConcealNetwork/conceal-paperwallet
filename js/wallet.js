@@ -58,7 +58,7 @@ var keys_download = function () {
   var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(keysAsJSON));
   var dlAnchorElem = document.getElementById('downloadAnchorElem');
   dlAnchorElem.setAttribute("href", dataStr);
-  dlAnchorElem.setAttribute("download", "ccxKeys.json");
+  dlAnchorElem.setAttribute("download", "xuniKeys.json");
   dlAnchorElem.click();
 }
 
