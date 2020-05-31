@@ -83,7 +83,7 @@ var restore_keys = function (lang) {
 };
 
 var backToHomepage = function () {
-  window.location.href = 'https://paperwallet.ultranote.org/';
+  window.location.href = 'https://ultranote.org/';
 }
 
 var genwallet = function (lang) {
