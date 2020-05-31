@@ -83,7 +83,7 @@ var restore_keys = function (lang) {
 };
 
 var backToHomepage = function () {
-  window.location.href = 'https://conceal.network';
+  window.location.href = 'https://paperwallet.ultranote.org/';
 }
 
 var genwallet = function (lang) {
@@ -246,7 +246,7 @@ function genwallet_prefix()
     prefix_widget = document.getElementById("prefix_widget");
     prefix = prefix_widget.value;
     prefix.trim();
-    if (prefix.length < 5 || prefix[0] != "ccx7") {
+    if (prefix.length < 5 || prefix[0] != "Xuni") {
       alert("Bad prefix "+prefix+" should start with K and be at least one extra character");
       return;
     }
