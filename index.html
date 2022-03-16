@@ -40,13 +40,13 @@
         <div class="logoText">
           <h2 class="slim-logo">
             <a href="index.html">
-              <span>PAPER WALLET</span></a>
+              <span class="text-white">PAPER WALLET</span></a>
           </h2>
         </div>
       </div>
       <!-- slim-header-left -->
       <div class="slim-header-right">
-        <button id="btnBackToHomepage" class="btn btn-primary-outline" type="button" value="Generate a wallet">Back to
+        <button id="btnBackToHomepage" class="btn lookup-btn-style" type="button" value="Generate a wallet">Back to
           homepage</button>
       </div>
       <!-- header-right -->
@@ -55,16 +55,16 @@
   </div>
   <!-- slim-header -->
 
-  <div id="content">
+  <div id="content" class="bg-purple">
     <div class="container">
       <div id="page">
 
         <div id="intro" class="row">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body input-bg-purple-dark">
               <h5 class="card-title tx-normal tx-white mg-b-10">What is a Paper Wallet?</h5>
               <div class="card-text">
-                <p>
+                <p class="text-white">
                   A paper wallet is an offline mechanism for storing UltraNote coins. The process involves printing the
                   private keys and UltraNote addresses onto paper. Physical wallets, also known as "physical UltraNotes,"
                   are considered one of the safest ways to store UltraNote; if properly constructed, and provided that
@@ -72,7 +72,7 @@
                   holdings. Images of physical UltraNote coins are commonly seen in media coverage in innovative styles,
                   mostly with a ‘new look’ of the coin and the private key printed either on paper, plastic, or metal.
                 </p>
-                <p>
+                <p class="text-white">
                   A paper wallet is considered an extremely secure way to keep UltraNote safe from cyber-attacks, malware,
                   etc. A paper wallet involves "printing" and storing UltraNote coins in an offline mode. But it's
                   important to remember that it’s not the UltraNote coins that are being printed out like regular
@@ -90,19 +90,19 @@
         <div class="row  d-print-none">
           <div class="col-12 d-print-none">
             <center>
-              <h3 class="generateRow">
-                <button id="btnShowGenerate" class="btn btn-primary-outline" type="button"
+              <h3 class="generateRow text-white">
+                <button id="btnShowGenerate" class="btn lookup-btn-style" type="button"
                   value="Generate a wallet">Generate a Wallet</button> or
-                <button id="btnShowRestore" class="btn btn-primary-outline" type="button"
+                <button id="btnShowRestore" class="btn lookup-btn-style" type="button"
                   value="restore keys from seed phrase">Restore keys from seed phrase</button>
               </h3>
-              <div id="generate">
+              <div id="generate" class="text-white">
                 <p>For extra security, type a few random letters, words, numbers, or symbols below. Press "Generate
                   Wallet" when you are done.</p>
-                <input class="form-control tx-gray-300" id="user_entropy_widget" type="text" value=""
+                <input class="form-control input-bg-purple-dark" id="user_entropy_widget" type="text" value=""
                   placeholder="  The more random stuff you type in this box, the better your keys will be." /><br /><br />
                 <center>
-                  <button id="btnGenerateWallet" class="btn btn-primary-outline" type="button"
+                  <button id="btnGenerateWallet" class="btn lookup-btn-style" type="button"
                     value="Generate wallet">Generate Wallet</button>
                 </center>
               </div>

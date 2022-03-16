@@ -3,8 +3,24 @@ body {
 
 /******************** HEADER *********************/
 .slim-header {
-  background-color: #212529;
-  border-bottom-color: #343a40; }
+  background-color: #3B3363;
+  border: none;
+}
+
+.bg-purple {
+  background-color: #3B3363;
+}
+
+.input-bg-purple-dark {
+  background: #2C254A !important;
+  border-color: transparent !important;
+}
+
+.lookup-btn-style {
+  background-color: #3B3363;
+  color: white;
+  border: 1px solid white !important;
+}
 
 .slim-logo a {
   color: #1b84e7; }
