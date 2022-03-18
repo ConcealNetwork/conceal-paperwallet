@@ -1,5 +1,5 @@
 body {
-  background-color: #282d31; }
+  background-color: #3B3363; }
 
 /******************** HEADER *********************/
 .slim-header {
@@ -325,8 +325,9 @@ hr {
 
 /******************** CARD ********************/
 .card:not([class*=" bg-"]) {
-  background-color: #212529;
-  border-color: #343a40; }
+  background: #2C254A !important;
+  border-color: transparent !important;
+}
 
 .card-header,
 .card-footer {
