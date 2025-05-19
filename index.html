@@ -16,6 +16,11 @@
   <link rel="stylesheet" href="css/slim.one.css">
   <link rel="stylesheet" href="css/iziToast.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/print.css">
+
+  <style>
+    /* Any non-print styles can go here */
+  </style>
 
   <!-- script files -->
 
@@ -33,6 +38,10 @@
 </head>
 
 <body>
+  <!-- Safe corner divs for printing -->
+  <div class="safe-corner bottom-left d-none d-print-block"></div>
+  <div class="safe-corner bottom-right d-none d-print-block"></div>
+  
   <div class="slim-header">
     <div class="container">
       <div class="slim-header-left">
@@ -59,7 +68,7 @@
     <div class="container">
       <div id="page">
 
-        <div id="intro" class="row">
+        <div id="intro" class="row d-print-none">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title tx-normal tx-white mg-b-10">What is a Paper Wallet?</h5>
