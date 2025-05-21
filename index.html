@@ -16,6 +16,11 @@
   <link rel="stylesheet" href="css/slim.one.css">
   <link rel="stylesheet" href="css/iziToast.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/print.css">
+
+  <style>
+    /* Any non-print styles can go here */
+  </style>
 
   <!-- script files -->
 
@@ -33,6 +38,10 @@
 </head>
 
 <body>
+  <!-- Safe corner divs for printing -->
+  <div class="safe-corner bottom-left d-none d-print-block"></div>
+  <div class="safe-corner bottom-right d-none d-print-block"></div>
+  
   <div class="slim-header">
     <div class="container">
       <div class="slim-header-left">
@@ -59,7 +68,7 @@
     <div class="container">
       <div id="page">
 
-        <div id="intro" class="row">
+        <div id="intro" class="row d-print-none">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title tx-normal tx-white mg-b-10">What is a Paper Wallet?</h5>
@@ -70,12 +79,12 @@
                   are considered one of the safest ways to store Conceal; if properly constructed, and provided that
                   certain precautions are taken, it will be nearly impossible for a hostile user to access your Conceal
                   holdings. Images of physical Conceal coins are commonly seen in media coverage in innovative styles,
-                  mostly with a ‘new look’ of the coin and the private key printed either on paper, plastic, or metal.
+                  mostly with a 'new look' of the coin and the private key printed either on paper, plastic, or metal.
                 </p>
                 <p>
                   A paper wallet is considered an extremely secure way to keep Conceal safe from cyber-attacks, malware,
                   etc. A paper wallet involves "printing" and storing Conceal coins in an offline mode. But it's
-                  important to remember that it’s not the Conceal coins that are being printed out like regular
+                  important to remember that it's not the Conceal coins that are being printed out like regular
                   currency. It's the information stored in a Conceal wallet or digital wallet that gets printed out. The
                   data appearing on the wallet includes the public key (wallet address), which allows people to transfer
                   money into that wallet, and the private key, which gives access to fund spending. Thus, Conceal coins
@@ -206,15 +215,33 @@
                   </div>
                 </div>
               </div>
-
-              <div class="d-print-none printRow">
-                <div class="col-12">
-                  <center>
-                    <input id="btnPagePrint" type="button" class="btn btn-primary-outline" value="Print This Page" />
-                    <input id="btnDownloadKeys" type="button" class="btn btn-primary-outline" value="Download Keys" />
-                    <a id="downloadAnchorElem" href="#">
-                  </center>
+            </div>
+            <br>
+            <div class="row d-print-block">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title tx-normal tx-white mg-b-10">Import QR Code for Web Wallet</h5>
+                    <p class="card-subtitle tx-normal mg-b-15">Scan this QR code to import your wallet with all keys.</p>
+                    <div class="card-text">
+                      <center>
+                        <div id="importQrCodeWrapper">
+                          <div id="importQrCode"></div>
+                        </div>
+                      </center>
+                    </div>
+                  </div>
                 </div>
+              </div>
+            </div>
+            <br>
+            <div class="d-print-none printRow">
+              <div class="col-12">
+                <center>
+                  <input id="btnPagePrint" type="button" class="btn btn-primary-outline" value="Print This Page" />
+                  <input id="btnDownloadKeys" type="button" class="btn btn-primary-outline" value="Download Keys" />
+                  <a id="downloadAnchorElem" href="#"></a>
+                </center>
               </div>
             </div>
           </div>

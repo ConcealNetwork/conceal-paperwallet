@@ -42,8 +42,68 @@ function initializeQrCode() {
     });
   });
 
-  $('#qrcode').qrcode($("#address_widget").html());
+  $('#qrcode').qrcode({
+    text: $("#address_widget").html(),
+    width: 160,
+    height: 160,
+    correctLevel: 2,   // High error correction level (Q = 2)
+    background: "#ffffff",
+    foreground: "#000000"
+  });
+  
+  // Add padding around the QR code using CSS
+  $('#qrCodeWrapper').css({
+    'padding': '10px',
+    'background-color': '#ffffff',
+    'display': 'inline-block'
+  });
+  
   $("#qrcode").show();
+}
+
+function initializeImportQrCode() {
+  try {
+    $('#importQrCode').hide();
+    $('#importQrCode').html("");
+    
+    var address = $("#address_widget").html();
+    var spendKey = $("#spend_key_widget").html();
+    var viewKey = $("#view_key_widget").html();
+    //var mnemonicSeed = $("#mnemonic_widget").html();
+    
+    // Create import string without mnemonic seed (too large for QR code)
+    var importString = "conceal." + address + 
+                      "?spend_key=" + spendKey + 
+                      "?view_key=" + viewKey;
+    
+    // Remove mnemonic from QR code due to length limitations
+    // "?mnemonic_seed=" + encodeURIComponent(mnemonicSeed)
+    
+    // Create QR code with optimized parameters for better readability
+    $('#importQrCode').qrcode({
+      text: importString,
+      width: 240,
+      height: 240,
+      correctLevel: 3,   // Highest error correction level (H)
+      typeNumber: 0,     // Auto-detect appropriate type number
+      background: "#ffffff",
+      foreground: "#000000"
+    });
+    
+    // Add padding around the QR code using CSS
+    $('#importQrCodeWrapper').css({
+      'padding': '15px',
+      'background-color': '#ffffff',
+      'display': 'inline-block'
+    });
+    
+    $("#importQrCode").show();
+  } catch (err) {
+    console.error("QR Code generation error:", err);
+    // Show error message to user if needed
+    $('#importQrCode').html("<div class='alert alert-danger'>QR code generation failed. The data might be too large.</div>");
+    $("#importQrCode").show();
+  }
 }
 
 var keys_download = function () {
@@ -76,6 +136,7 @@ var restore_keys = function (lang) {
 
     document.getElementById("step2").style.display = "block";
     initializeQrCode();
+    initializeImportQrCode();
   } catch (err) {
     $("#restoreError").html(err);
     $("#restoreError").show();
@@ -111,6 +172,7 @@ var genwallet = function (lang) {
   //qr.makeCode("conceal:"+keys.public_addr);
 
   initializeQrCode();
+  initializeImportQrCode();
 };
 
 function copyToClipboard(text) {
